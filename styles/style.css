@@ -1,0 +1,25 @@
+.calculatorHeader {
+    background: #099a9e;
+    color: #ffebef;
+    text-align: center;
+    font-family: ProximaNova, Helvetica, Arial, sans-serif;
+    padding: 10px 5%;
+    font-size: 5em;
+}
+input {
+    width: 15%;
+}
+
+#submitEmployeeButton {
+    float: right;
+    margin-right: 20%;
+    padding: 10px;
+}
+
+p {
+    font-weight: bolder;
+}
+
+table {
+    width: 100%;
+}
