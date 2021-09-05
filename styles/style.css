@@ -1,6 +1,6 @@
 .calculatorHeader {
-    background: #099a9e;
-    color: #ffebef;
+    background: #09a99e;
+    color: #eeeeee;
     text-align: center;
     font-family: ProximaNova, Helvetica, Arial, sans-serif;
     padding: 10px 5%;
@@ -26,8 +26,9 @@ table {
 }
 
 th {
-    background-color: darkgrey;
+    background-color: #09a99e;
     border: 1px solid black;
+    color: #eeeeee;
 }
 
 td {
@@ -35,7 +36,8 @@ td {
 }
 
 tr:nth-child(odd) {
-    background-color: lightgray;
+    background-color: #09a99e;
+
 }
 
 tfoot {
