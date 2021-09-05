@@ -2,8 +2,8 @@
 const onReady = () => {
     // provides button operation that calls the getEmployee Function
     $( '#submitEmployeeButton').on( 'click', getEmployee );
-    // provides functionality to the added delete buttons in the table to remove the closest TR tags from the DOM
-    $( `#employeeTable`).on( 'click', '#deleteEmployee', function(){$(this).closest('tr').remove();});
+    // provides functionality to the added delete buttons in the table to call the deleteEmployee function
+    $( `#employeeTable`).on( 'click', '#deleteEmployee', deleteEmployee );
 }
 
 // calls the onReady function when the document is loaded
@@ -22,7 +22,7 @@ const getEmployee = () => {
     let employeeTitle = $(`#employeeTitle`).val();
     let annualSalary = $(`#annualSalary`).val();
 
-    // converts the input Annual Salary to a number type
+    // converts the passed Annual Salary to a number type
     let numberSalary = Number(annualSalary.replace('$', ''));
 
     // empty out input fields
@@ -39,17 +39,20 @@ const getEmployee = () => {
 
 // updates the Total monthly Salary on the DOM
 const monthlySalary = (numberSalary) => {
+    
+    totalMonthlySalary += numberSalary/12
     // empties anything currently in the monthly salary
     $( `#totalMonthlySalary`).empty();
     // adds the current value of Total Monthly Salary to the passed annual salary parameter divided by 12 to get monthly salary
-    $( `#totalMonthlySalary`).append(`\$${totalMonthlySalary += numberSalary/12}`);
-    // if the Total Monthly Salary value is greater than $20000, updates the background to be red and font to be white, otherwise removes those properties if it's below
+    $( `#totalMonthlySalary`).append(`\$${totalMonthlySalary.toFixed(2)}`);
+    // if the Total Monthly Salary value is greater than $20000, updates the background to be red and font to be white
     if (totalMonthlySalary > 20000){
         $( `#totalSalary`).css( `background-color` , `red`);
         $( `#totalSalary`).css( `color` , `white`);
-    } else {
-        $( `#totalSalary` ).removeProperty ( `background-color`);
-        $( `#totalSalary` ).removeProperty ( `color` );
+    } 
+    // removes styling if the Total Monthly Salary falls below or equal to 20000
+    if (totalMonthlySalary <= 20000) {
+        $( `#totalSalary` ).removeAttr( `style`);
     }
 }
 
@@ -58,9 +61,17 @@ const showEmployee = (firstName, lastName, employeeID, employeeTitle, annualSala
     // gets the table element from HTML
     let el = $ ('#employeeTable');
     //appends the relevant information for the input employee to the table as a new row with the different data points, as well as a button to delete the current employee
-    el.append(`<tr class="employeeRow"><td>${firstName}</td><td>${lastName}</td><td>${employeeID}</td><td>${employeeTitle}</td><td>${annualSalary}</td><td><button id="deleteEmployee">Delete</button></td></tr>`);
+    el.append(`<tr class="employeeRow"><td>${firstName}</td><td>${lastName}</td><td>${employeeID}</td><td>${employeeTitle}</td><td class="employeeSalary">${annualSalary}</td><td><button id="deleteEmployee">Delete</button></td></tr>`);
 }
 
 const deleteEmployee = () => {
-    
+    // find the salary of the employee that was deleted from the table
+    let foundSalary = $(`#deleteEmployee`).parent().parent().children(`.employeeSalary`).text();
+    // change that salary to a number type
+    foundSalary = Number(foundSalary.replace('$', ''));
+    // pass that salary to the monthly Salary function as a negative number 
+    monthlySalary(-foundSalary);
+    // when clicking a deleteEmployee button removes the nearest Table Row attribute as well as all children
+    // $( '#deleteEmployee' ).closest('tr').remove();
+    $(`#deleteEmployee`).parent().parent().remove();
 }
