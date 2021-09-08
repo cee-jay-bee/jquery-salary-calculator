@@ -74,6 +74,3 @@ const showEmployee = (firstName, lastName, employeeID, employeeTitle, annualSala
     el.append(`<tr class="employeeRow"><td>${firstName}</td><td>${lastName}</td><td>${employeeID}</td><td>${employeeTitle}</td><td class="employeeSalary">${annualSalary}</td><td><button class="deleteEmployee">Delete</button></td></tr>`);
 }
 
-const deleteEmployee = () => {
-    
-}
