@@ -28,11 +28,13 @@ table {
 th {
     background-color: #09a99e;
     border: 1px solid black;
+    border-style: solid;
     color: #eeeeee;
 }
 
 td {
     border: 1px solid black;
+    border-style: solid;
 }
 
 tr:nth-child(odd) {
@@ -47,4 +49,8 @@ tfoot {
 
 #totalSalary{
     float:right;
+}
+
+.deleteEmployee:hover {
+    background-color:#09a99e;
 }

@@ -13,6 +13,9 @@ From there, I worked to append the inputted information onto the DOM and tracked
 - Add as many employees as you have to calculate total monthly salary
 - If you need to remove an employee, click the appropriate 'Delete' button 
 
+## Screenshot
+![Screenshot of Salary Calculator](images/salary-calculator-screenshot.png)
+
 ## Built With
 
 - HTML, CSS, JS, JQuery
