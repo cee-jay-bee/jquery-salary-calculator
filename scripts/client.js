@@ -3,17 +3,7 @@ const onReady = () => {
     // provides button operation that calls the getEmployee Function
     $( '#submitEmployeeButton').on( 'click', getEmployee );
     // provides functionality to the added delete buttons in the table to call the deleteEmployee function
-    $( `#employeeTable`).on( 'click', '.deleteEmployee', function () {
-        // find the salary of the employee that was deleted from the table
-        let foundSalary = $(this).parent().parent().children(`.employeeSalary`).text();
-        // change that salary to a number type
-        foundSalary = Number(foundSalary.replace('$', ''));
-        // pass that salary to the monthly Salary function as a negative number 
-        monthlySalary(-foundSalary);
-        // when clicking a deleteEmployee button removes the nearest Table Row attribute as well as all children
-        $( this ).closest('tr').remove();
-    } );
-    
+    $( `#employeeTable`).on( 'click', '.deleteEmployee', deleteEmployee);
 }
 
 // calls the onReady function when the document is loaded
@@ -74,3 +64,13 @@ const showEmployee = (firstName, lastName, employeeID, employeeTitle, annualSala
     el.append(`<tr class="employeeRow"><td>${firstName}</td><td>${lastName}</td><td>${employeeID}</td><td>${employeeTitle}</td><td class="employeeSalary">${annualSalary}</td><td><button class="deleteEmployee">Delete</button></td></tr>`);
 }
 
+function deleteEmployee () {
+    // find the salary of the employee that was deleted from the table
+    let foundSalary = $(this).parent().parent().children(`.employeeSalary`).text();
+    // change that salary to a number type
+    foundSalary = Number(foundSalary.replace('$', ''));
+    // pass that salary to the monthly Salary function as a negative number 
+    monthlySalary(-foundSalary);
+    // when clicking a deleteEmployee button removes the nearest Table Row attribute as well as all children
+    $( this ).closest('tr').remove();
+}
